@@ -14,8 +14,8 @@ WORKDIR /work
 
 COPY . /work/
 
-RUN npm install --no-progres
 RUN npm install -g typescript
+RUN npm install --no-progres
 RUN npm run build
 
 # -------------------------------------------------------

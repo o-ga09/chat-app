@@ -24,8 +24,9 @@ app.use(cors(corsOptions));
 
 io.on("connection", (socket) => {
   console.log("user connected");
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
+  socket.on("send message", (msg) => {
+    io.emit("receive message", msg);
+    console.log(msg);
   });
 });
 

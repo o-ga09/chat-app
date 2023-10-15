@@ -9,9 +9,9 @@ export class Usecase {
     return res;
   }
 
-  async receiveMessage(): Promise<Message> {
-    const res = await this.IMsg.receiveMessage();
-    return res;
+   receiveMessage(): void {
+    this.IMsg.receiveMessage();
+
   }
 }
 

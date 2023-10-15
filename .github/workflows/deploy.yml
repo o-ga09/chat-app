@@ -34,7 +34,7 @@ jobs:
 
       - name: Build a docker image
         run: |
-          cd backend
+          cd server
           docker build --platform linux/amd64 -t ${{ env.IMAGE }} --target runtime ./
 
       - name: Push the docker image

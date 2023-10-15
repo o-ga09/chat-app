@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "**.ts"
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
@@ -13,7 +11,8 @@ env:
   GCP_REGION: ${{ secrets.GCP_REGION }}
   GCP_REPOSITORY: ${{ secrets.GCP_REPOSITORY }}
   GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  IMAGE: asia-northeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPOSITORY }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+  IMAGE: ${{ secrets.GCP_REPOSITORY }}/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPOSITORY }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+  # IMAGE: asia-northeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPOSITORY }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
 
 jobs:
   deploy:
@@ -34,7 +33,7 @@ jobs:
 
       - name: Build a docker image
         run: |
-          cd backend
+          cd server
           docker build --platform linux/amd64 -t ${{ env.IMAGE }} --target runtime ./
 
       - name: Push the docker image

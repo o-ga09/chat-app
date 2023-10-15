@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
@@ -99,3 +100,20 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   }
 }
+=======
+    "compilerOptions": {
+      "target": "ESNEXT",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "skipLibCheck": true
+    },
+    "includes": [
+      "src/**/*"
+    ],
+    "exclude": ["src/**/**/__test__/*"],
+    "types": ["web","bun-types"]
+  }
+>>>>>>> 808d08307e6212fed102570ee87e6b01fc97765f

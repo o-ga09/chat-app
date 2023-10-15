@@ -22,7 +22,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-io.on("connection", (socket) => {
+io.on("connection", (socket: { on: (arg0: string, arg1: (msg: any) => void) => void; }) => {
   console.log("user connected");
   socket.on("send message", (msg) => {
     io.emit("receive message", msg);
@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
 });
 
 // ルーティングの設定
-app.get("/", (req, res) => {
+app.get("/", (req: any, res: { send: (arg0: string) => void; }) => {
   res.send("Hello World!");
   console.log("/ へアクセスがありました");
 });

@@ -14,7 +14,6 @@ WORKDIR /work
 
 COPY . /work/
 
-RUN npm i -g typescript
 RUN npm install --no-progres
 
 RUN npm run build
@@ -28,7 +27,6 @@ WORKDIR /app
 COPY ./package.json ./package-lock.json ./
 COPY --from=dependecy /app/node_modules ./node_modules
 COPY --from=build /work/dist ./dist
-COPY --from=build /work/prisma ./prisma
 
 ## PID1問題に対応する
 RUN apk add --no-cache tini

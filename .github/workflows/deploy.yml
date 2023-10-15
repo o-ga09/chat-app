@@ -28,7 +28,7 @@ jobs:
 
       - name: Configure docker for artifact registry
         run: |
-          gcloud auth configure-docker ${{secrets.GCP_REPOSITORY }}
+          gcloud auth configure-docker us-west1-docker.pkg.dev
 
       - name: Build a docker image
         run: |

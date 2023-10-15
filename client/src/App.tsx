@@ -9,7 +9,7 @@ import { AiOutlineSend } from "react-icons/ai";
 import { Flex, Box } from "@chakra-ui/react";
 
 function App() {
-  const url = "http://localhost:8080";
+  const url = "https://chat-api-y7xk6pfxra-uw.a.run.app";
   const socket = io(url);
   const socketioDriver = new SocketioDriver();
   const usecase = new Usecase(socketioDriver);

@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 
 export class SocketioDriver implements IMessage {
   messages = [] as Message[];
-  url = "http://localhost:8080";
+  url = "https://chat-api-y7xk6pfxra-uw.a.run.app";
   socket = io(this.url); // サーバのURLを指定する
   
   sendMessage(_msg: Message): ResponseMsg {

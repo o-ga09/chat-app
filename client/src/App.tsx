@@ -15,7 +15,8 @@ function App() {
   const usecase = new Usecase(socketioDriver);
   const [receiveMessages, setReceiveMessages] = useState<Message[]>([]);
   const [inputMsg, setInputMsg] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
+  const [hasUserName, setHasUserName] = useState(false);
 
   useEffect(() => {
     socket.on("receive message", function (msg) {
@@ -25,14 +26,11 @@ function App() {
 
   const handleClick = () => {
     if (inputMsg === "") return;
-    if (userId === "") {
-      setUserId(Math.random().toString());
-    }
     const message = new Message(
       1,
       "title",
       "user1",
-      userId,
+      userName,
       inputMsg,
       new Date(),
       new Date()
@@ -45,23 +43,41 @@ function App() {
     setInputMsg(e.target.value);
   };
 
+  const handleUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+  };
+
+  const submitName = () => {
+    if (userName === "") return;
+    setHasUserName(true);
+  };
+
   return (
     <>
       <h1>send message test</h1>
 
+      {hasUserName ? (
+        <></>
+      ) : (
+        <Box>
+          <input placeholder="username" onChange={handleUserName}></input>
+          <button onClick={submitName}>submit</button>
+        </Box>
+      )}
+
       <Flex flexDirection={"column"}>
         {receiveMessages.map((msg) => (
           <>
-            {msg.sourceName === userId ? (
-              <Flex alignItems={"center"} justifyContent={"flex-start"}>
+            {msg.sourceName === userName ? (
+              <Flex alignItems={"center"} justifyContent={"flex-end"}>
                 <BiSolidUser size="2rem" style={{ paddingBottom: "1rem" }} />
                 <Box m={"0.5em 0"}>
                   <Box
-                    border={"solid 1px #000"}
+                    border={"solid 1px rgb(0, 122, 255)"}
                     borderRadius={"10px"}
                     p={"0.25em 1em"}
-                    background={"#fff"}
-                    color={"#000"}
+                    background={"rgb(0, 122, 255)"}
+                    color={"white"}
                     boxShadow={
                       "rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px"
                     }
@@ -76,15 +92,15 @@ function App() {
                 </Box>
               </Flex>
             ) : (
-              <Flex alignItems={"center"} justifyContent={"flex-end"}>
+              <Flex alignItems={"center"} justifyContent={"flex-start"}>
                 <BiSolidUser size="2rem" style={{ paddingBottom: "1rem" }} />
                 <Box m={"0.5em 0"}>
                   <Box
-                    border={"solid 1px rgb(0, 122, 255)"}
+                    border={"solid 1px #000"}
                     borderRadius={"10px"}
                     p={"0.25em 1em"}
-                    background={"rgb(0, 122, 255)"}
-                    color={"white"}
+                    background={"#fff"}
+                    color={"#000"}
                     boxShadow={
                       "rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px"
                     }
